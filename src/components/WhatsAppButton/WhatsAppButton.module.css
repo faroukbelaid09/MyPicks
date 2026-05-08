@@ -49,13 +49,6 @@
 /* MOBILE FIX */
 @media (max-width: 768px) {
   .button {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    bottom: 15px;
-  }
-
-  .text {
-    font-size: 13px;
+    display: none;
   }
 }
