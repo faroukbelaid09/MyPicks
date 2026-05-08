@@ -1,0 +1,98 @@
+/* HERO SECTION */
+.hero {
+  padding-top: 8rem;
+  padding-bottom: 6rem;
+}
+
+/* layout */
+.wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+/* TEXT SECTION */
+.tag {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: var(--text-light);
+  max-width: 500px;
+  margin-bottom: 2rem;
+}
+
+/* ACTION BUTTONS */
+.actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.primaryBtn {
+  background: var(--primary);
+  color: white;
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.primaryBtn:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+.secondaryBtn {
+  padding: 0.9rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+}
+
+.secondaryBtn:hover {
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+
+/* IMAGE */
+.imageBox {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .wrapper {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .subtitle {
+    margin-inline: auto;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,28 @@
+.featured {
+  padding: 40px 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+
+  color: #111;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 20px;
+}
+
+.grid > div {
+  min-height: 250px;
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

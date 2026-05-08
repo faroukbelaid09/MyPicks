@@ -1,0 +1,61 @@
+.button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: #25D366;
+  color: white;
+
+  padding: 12px 18px;
+  border-radius: 999px;
+
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+
+  text-decoration: none;
+  font-weight: 500;
+
+  z-index: 9999;
+
+  animation: pulse 2.5s infinite;
+}
+
+/* icon */
+.icon {
+  font-size: 18px;
+}
+
+/* text */
+.text {
+  font-size: 14px;
+}
+
+/* pulse animation */
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+  .button {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 15px;
+  }
+
+  .text {
+    font-size: 13px;
+  }
+}

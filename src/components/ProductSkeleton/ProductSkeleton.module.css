@@ -1,0 +1,67 @@
+.card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* shared shimmer */
+.image,
+.title,
+.price,
+.button {
+  background: #eee;
+  position: relative;
+  overflow: hidden;
+}
+
+/* shimmer effect */
+.image::after,
+.title::after,
+.price::after,
+.button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150px;
+  width: 150px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+/* image block */
+.image {
+  height: 200px;
+}
+
+/* text blocks */
+.title {
+  height: 16px;
+  margin: 12px 10px;
+  border-radius: 6px;
+  width: 70%;
+}
+
+.price {
+  height: 14px;
+  margin: 10px;
+  border-radius: 6px;
+  width: 40%;
+}
+
+.button {
+  height: 38px;
+  margin: 12px 10px;
+  border-radius: 10px;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(300px);
+  }
+}

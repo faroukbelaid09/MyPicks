@@ -1,0 +1,135 @@
+.admin {
+  min-height: 100vh;
+  padding: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background: var(--bg);
+}
+
+.admin h1 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-family: var(--font-heading);
+}
+
+.form {
+  width: 100%;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input,
+textarea,
+select {
+  padding: 0.9rem 1rem;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  font-size: 1rem;
+
+  background: white;
+}
+
+textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+button {
+  padding: 1rem;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--primary);
+  color: white;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: var(--primary-light);
+}
+
+input[type="file"] {
+  padding: 0.7rem;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+/* PRODUCT LIST */
+.list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 1rem;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  background: white;
+}
+
+.card img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions button {
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.actions button:first-child {
+  background: var(--primary);
+  color: white;
+}
+
+.actions button:last-child {
+  background: #e74c3c;
+  color: white;
+}
+
+.badgeOverlay {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+
+  background: gold;
+  color: black;
+
+  padding: 4px 8px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: bold;
+}
