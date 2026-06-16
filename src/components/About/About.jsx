@@ -1,18 +1,15 @@
 import { motion } from 'motion/react'
 
 import Container from '../Ui/Container/Container'
-
 import styles from './About.module.css'
 
-function About() {
+function About({ image }) {
+  const aboutImage = image || `${import.meta.env.BASE_URL}mypicks-food.jpg`
+
   return (
-    <section className={styles.about} id='about'>
-
+    <section className={styles.about} id="about">
       <Container>
-
         <div className={styles.wrapper}>
-
-          {/* LEFT SIDE */}
           <motion.div
             className={styles.content}
             initial={{ opacity: 0, y: 30 }}
@@ -20,7 +17,6 @@ function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-
             <span className={styles.label}>
               ABOUT MYPICKS
             </span>
@@ -42,7 +38,6 @@ function About() {
             </p>
 
             <div className={styles.stats}>
-
               <div>
                 <h3>100%</h3>
                 <span>Homemade</span>
@@ -57,12 +52,9 @@ function About() {
                 <h3>Fast</h3>
                 <span>WhatsApp Ordering</span>
               </div>
-
             </div>
-
           </motion.div>
 
-          {/* RIGHT SIDE */}
           <motion.div
             className={styles.images}
             initial={{ opacity: 0, scale: 0.95 }}
@@ -70,38 +62,29 @@ function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-
-            {/* BIG IMAGE */}
             <div className={styles.mainImage}>
               <img
-                src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop"
-                alt="Homemade Nigerian food"
+                src={aboutImage}
+                alt="MyPicks homemade food"
                 loading="lazy"
               />
             </div>
 
-            {/* SMALL FLOATING CARD */}
             <motion.div
               className={styles.floatingCard}
-              animate={{
-                y: [0, -10, 0],
-              }}
+              animate={{ y: [0, -10, 0] }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
                 ease: 'easeInOut',
               }}
             >
-              <span>🔥 Fresh Daily</span>
-              <p>Affordable yummy small chops & meals.</p>
+              <span>Fresh Daily</span>
+              <p>Affordable yummy small chops and meals.</p>
             </motion.div>
-
           </motion.div>
-
         </div>
-
       </Container>
-
     </section>
   )
 }

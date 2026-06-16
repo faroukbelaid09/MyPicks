@@ -1,4 +1,3 @@
-/* CARD */
 .card {
   background: white;
   border-radius: 18px;
@@ -6,43 +5,87 @@
 
   box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.detailsLink {
+  display: block;
 }
 
 .card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.08);
 }
 
-/* IMAGE */
+/* IMAGE WRAPPER */
 .imageWrapper {
+  position: relative;
   width: 100%;
-  height: 220px;
+  aspect-ratio: 1 / 1;
+  min-height: 260px;
 
   overflow: hidden;
   background: #f3f3f3;
 }
 
+/* IMAGE */
 .imageWrapper img {
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-
-  opacity: 0;
-
-  transition: opacity 0.35s ease;
+  object-position: center 45%;
 
   display: block;
+
+  opacity: 0;
+  transform: scale(1.03);
+
+  transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-/* ONLY FADE */
-.loaded {
-  opacity: 1 !important;
+/* WHEN LOADED */
+.imageWrapper img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* SKELETON OVERLAY */
+.imageSkeleton {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    90deg,
+    #f2f2f2 25%,
+    #e8e8e8 50%,
+    #f2f2f2 75%
+  );
+
+  background-size: 200% 100%;
+  animation: shimmer 1.2s infinite;
+
+  z-index: 1;
+}
+
+/* IMAGE ABOVE SKELETON */
+.imageWrapper img {
+  position: relative;
+  z-index: 2;
+}
+
+/* SHIMMER ANIMATION */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* CONTENT */
 .content {
-  padding: 1rem;
+  padding: 1rem 1rem 0.7rem;
 }
 
 .topRow {
@@ -61,6 +104,30 @@
 .price {
   font-size: 0.9rem;
   font-weight: 600;
+  white-space: nowrap;
+}
+
+.category {
+  font-size: 0.85rem;
+}
+
+.addButton {
+  width: calc(100% - 2rem);
+  min-height: 42px;
+  margin: 0 1rem 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+
+  background: var(--primary);
+  color: white;
+
+  font-weight: 700;
 }
 
 .desc {

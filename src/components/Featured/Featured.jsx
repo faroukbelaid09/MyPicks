@@ -7,25 +7,19 @@ import Container from '../Ui/Container/Container'
 import styles from './Featured.module.css'
 
 function Featured({ products, loading }) {
-  const featured = products.filter(
-    item => item.featured === true
-  )
+  const featured = products.filter(item => item.featured === true)
 
   return (
-    <section className={styles.featured}>
+    <section className={styles.featured} id="featured">
       <Container>
-
-        <h2 className={styles.title}>
-          Chef’s Picks
-        </h2>
+        <h2 className={styles.title}>Chef's Picks</h2>
 
         <div className={styles.grid}>
-
           {loading
             ? Array(3).fill().map((_, i) => (
                 <ProductSkeleton key={i} />
               ))
-            : featured.map((item) => (
+            : featured.map(item => (
                 <motion.div
                   key={item.id}
                   initial={{ opacity: 0, y: 15 }}
@@ -37,9 +31,7 @@ function Featured({ products, loading }) {
                 </motion.div>
               ))
           }
-
         </div>
-
       </Container>
     </section>
   )

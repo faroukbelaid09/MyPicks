@@ -1,21 +1,17 @@
-import { motion } from 'motion/react'
+import { createGeneralOrderMessage, createWhatsAppLink } from '../../config/order'
+import Container from '../Ui/Container/Container'
 import styles from './Hero.module.css'
-import Container from '../ui/Container/Container'
 
-function Hero() {
+function Hero({ image }) {
+  const orderLink = createWhatsAppLink(createGeneralOrderMessage())
+  const heroImage = image || `${import.meta.env.BASE_URL}hero.jpg`
+
   return (
     <section className={styles.hero} id="home">
       <Container>
         <div className={styles.wrapper}>
-
-          {/* Text Content */}
-          <motion.div
-            className={styles.text}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <p className={styles.tag}>Homemade • Fresh • Daily</p>
+          <div className={`${styles.text} ${styles.textEnter}`}>
+            <p className={styles.tag}>Homemade - Fresh - Daily</p>
 
             <h1 className={styles.title}>
               Taste Homemade<br />
@@ -29,9 +25,10 @@ function Hero() {
 
             <div className={styles.actions}>
               <a
-                href="https://wa.me/YOUR_NUMBER"
+                href={orderLink}
                 className={styles.primaryBtn}
                 target="_blank"
+                rel="noreferrer"
               >
                 Order on WhatsApp
               </a>
@@ -40,21 +37,14 @@ function Hero() {
                 View Menu
               </a>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Image */}
-          <motion.div
-            className={styles.imageBox}
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7 }}
-          >
+          <div className={`${styles.imageBox} ${styles.imageEnter}`}>
             <img
-              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c"
+              src={heroImage}
               alt="Homemade Food"
             />
-          </motion.div>
-
+          </div>
         </div>
       </Container>
     </section>

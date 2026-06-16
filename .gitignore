@@ -33,3 +33,9 @@ firebase-debug.log*
 
 # optional coverage reports
 coverage
+
+# local menu import source files
+import-data/
+
+# paused mobile app workspace
+admin-mobile/

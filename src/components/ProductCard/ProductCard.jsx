@@ -1,58 +1,72 @@
+import { ShoppingCart } from 'lucide-react'
+import { motion } from 'motion/react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+
+import { useCart } from '../../context/useCart'
+import { formatPrice } from '../../utils/price'
 import styles from './ProductCard.module.css'
 
 function ProductCard({ product }) {
-    const [loaded, setLoaded] = useState(false)
+  const [loaded, setLoaded] = useState(false)
+  const { addItem } = useCart()
 
-    const handleOrder = () => {
-        const message = `Hi MyPicks 👋 I want to order:
-${product.name} - ${product.price}`
+  return (
+    <motion.div
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.2 }}
+    >
+      <article className={styles.card}>
+        <Link
+          to={`/product/${product.id}`}
+          className={styles.detailsLink}
+        >
+          <div className={styles.imageWrapper}>
+            <img
+              src={product.image}
+              alt={product.name}
+              onLoad={() => setLoaded(true)}
+              className={`${styles.image} ${
+                loaded ? styles.loaded : ''
+              }`}
+            />
 
-        window.open(
-            `https://wa.me/YOUR_NUMBER?text=${encodeURIComponent(message)}`,
-            '_blank'
-        )
-    }
+            {!loaded && (
+              <div className={styles.imageSkeleton} />
+            )}
 
-    return (
-        <div className={styles.card}>
+            {product.featured && (
+              <span className={styles.badge}>
+                Chef Pick
+              </span>
+            )}
+          </div>
 
-            {/* IMAGE */}
-            <div className={styles.imageWrapper}>
-                <img
-                    src={product.image}
-                    alt={product.name}
-                    loading="lazy"
-                    className={loaded ? styles.loaded : ''}
-                    onLoad={() => setLoaded(true)}
-                />
+          <div className={styles.content}>
+            <div className={styles.topRow}>
+              <h3>{product.name}</h3>
+
+              <span className={styles.price}>
+                {formatPrice(product.price)}
+              </span>
             </div>
 
-            {/* CONTENT */}
-            <div className={styles.content}>
+            <p className={styles.category}>
+              {product.category}
+            </p>
+          </div>
+        </Link>
 
-                <div className={styles.topRow}>
-                    <h3>{product.name}</h3>
-
-                    <span className={styles.price}>
-                        {product.price}
-                    </span>
-                </div>
-
-                <p className={styles.desc}>
-                    {product.description}
-                </p>
-
-                <button
-                    className={styles.orderButton}
-                    onClick={handleOrder}
-                >
-                    Order on WhatsApp
-                </button>
-
-            </div>
-        </div>
-    )
+        <button
+          className={styles.addButton}
+          onClick={() => addItem(product)}
+        >
+          <ShoppingCart size={17} />
+          Add to cart
+        </button>
+      </article>
+    </motion.div>
+  )
 }
 
 export default ProductCard

@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../firebase/config'
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../../firebase/auth'
 import styles from './Login.module.css'
 
 function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -13,8 +15,8 @@ function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password)
-      window.location.href = '/admin'
-    } catch (err) {
+      navigate('/admin', { replace: true })
+    } catch {
       setError('Invalid email or password')
     }
   }

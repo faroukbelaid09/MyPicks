@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react'
-import { Menu, X } from 'lucide-react'
-import { motion, AnimatePresence } from 'motion/react'
-
-import styles from './Navbar.module.css'
-import Container from '../ui/Container/Container'
 import { createPortal } from 'react-dom'
+import { Link } from 'react-router-dom'
+import { Menu, ShoppingCart, X } from 'lucide-react'
+
+import { createGeneralOrderMessage, createWhatsAppLink } from '../../config/order'
+import { useCart } from '../../context/useCart'
+import Container from '../Ui/Container/Container'
+import styles from './Navbar.module.css'
 
 function Navbar() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const { itemCount, openCart } = useCart()
 
-    // LOCK SCROLL WHEN MENU IS OPEN
     useEffect(() => {
         if (menuOpen) {
             document.body.style.overflow = 'hidden'
@@ -23,7 +25,6 @@ function Navbar() {
         }
     }, [menuOpen])
 
-    // SCROLL EFFECT
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 10)
@@ -35,6 +36,7 @@ function Navbar() {
 
     const toggleMenu = () => setMenuOpen(prev => !prev)
     const closeMenu = () => setMenuOpen(false)
+    const orderLink = createWhatsAppLink(createGeneralOrderMessage())
 
     const links = [
         { name: 'Home', href: '/' },
@@ -47,13 +49,18 @@ function Navbar() {
     return (
         <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
             <Container>
-
                 <div className={styles.inner}>
+                    <Link
+                        aria-label="MyPicks home"
+                        className={styles.logo}
+                        to="/"
+                    >
+                        <img
+                            src={`${import.meta.env.BASE_URL}mypicks-logo-transparent.png`}
+                            alt="MyPicks Snacks and More"
+                        />
+                    </Link>
 
-                    {/* LOGO */}
-                    <div className={styles.logo}>MyPicks</div>
-
-                    {/* DESKTOP LINKS */}
                     <nav className={styles.navLinks}>
                         {links.map(link => (
                             <a key={link.name} href={link.href}>
@@ -62,59 +69,68 @@ function Navbar() {
                         ))}
                     </nav>
 
-                    {/* CTA */}
-                    <button className={styles.cta}>
-                        Order Now
-                    </button>
+                    <div className={styles.actions}>
+                        <a
+                            href={orderLink}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={styles.cta}
+                        >
+                            Order Now
+                        </a>
 
-                    {/* MOBILE MENU BUTTON */}
-                    <button
-                        className={`${styles.menuBtn} ${menuOpen ? styles.menuActive : ''
-                            }`}
-                        onClick={toggleMenu}
-                    >
-                        <Menu size={22} />
-                    </button>
+                        <button
+                            aria-label={`Open cart with ${itemCount} items`}
+                            className={styles.cartButton}
+                            onClick={openCart}
+                        >
+                            <ShoppingCart size={20} />
+                            {itemCount > 0 && (
+                                <span>{itemCount > 99 ? '99+' : itemCount}</span>
+                            )}
+                        </button>
 
+                        <button
+                            aria-label="Open menu"
+                            className={`${styles.menuBtn} ${menuOpen ? styles.menuActive : ''
+                                }`}
+                            onClick={toggleMenu}
+                        >
+                            <Menu size={22} />
+                        </button>
+                    </div>
                 </div>
-
             </Container>
 
-            {/* MOBILE FULLSCREEN MENU */}
             {menuOpen &&
                 createPortal(
-                    <motion.div
-                        className={styles.mobileMenu}
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                    >
-
+                    <div className={styles.mobileMenu}>
                         <button className={styles.closeBtn} onClick={closeMenu}>
                             <X size={28} />
                         </button>
 
-                        <motion.nav className={styles.mobileLinks}>
+                        <nav className={styles.mobileLinks}>
                             {links.map(link => (
-                                <motion.a
+                                <a
                                     key={link.name}
                                     href={link.href}
                                     onClick={closeMenu}
                                 >
                                     {link.name}
-                                </motion.a>
+                                </a>
                             ))}
-                        </motion.nav>
+                        </nav>
 
-                        <motion.a
-                            href="https://wa.me/YOUR_NUMBER"
+                        <a
+                            href={orderLink}
+                            target="_blank"
+                            rel="noreferrer"
                             className={styles.mobileCta}
                             onClick={closeMenu}
                         >
                             Order on WhatsApp
-                        </motion.a>
-
-                    </motion.div>,
+                        </a>
+                    </div>,
                     document.body
                 )}
         </header>
